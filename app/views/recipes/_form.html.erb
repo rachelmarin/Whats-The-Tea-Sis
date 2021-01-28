@@ -1,0 +1,44 @@
+<%= form_for recipe do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <h3>Select Category</h3>
+  <div>
+    <%= f.collection_select :category_id, Category.all, :id, :type, include_blank: "Select Category" %>
+  </div>
+
+  <h3>Or Create category</h3>
+  <%= f.fields_for :category, recipe.build_category do |gb| %>
+    <div>
+      <%= gb.label :type %>
+      <%= gb.text_field :type %>
+    </div>
+    
+    <h3>Add Ingredients</h3>
+    <%= f.fields_for :ingredients do |inner_form| %>
+    <div>
+    <%= inner_form.label :item %>
+    <%= inner_form.text_field :item %><br/>
+    <%= inner_form.label :quantity %>
+    <%= inner_form.text_field :quantity %><br/>
+    </div>
+    <% end %>
+    <br><br>
+
+    <h3>Add Instructions</h3>
+   <div>
+    <%= f.label :instructions %>
+    <%= f.text_field :instructions %>
+  </div>
+
+  <% end %>
+
+  <br><br>
+
+  <%= f.submit button_name %>
+
+
+
+<% end %>
