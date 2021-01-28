@@ -1,31 +1,39 @@
 class recipesController < ApplicationController
     before_action :find_recipe, only: [:show, :edit, :update, :destroy ]  
    
-       def index
+   def index
        @recipes = Recipe.all    
-       end
+   end
    
-       def show
+   def show
        
-       end
+   end
 
-       def new
-         @recipe = Recipe.new
-        end
+   def new
+      @recipe = Recipe.new
+   end
     
-        def create
+   def create
          @recipe = Recipe.new(recipe_params)
       if @recipe.save
          redirect_to recipes_path
       else
          flash.now[:error] = @recipe.errors.full_messages
          render :new
-  end
+   end
 
-  def edit
+   def edit
            
-  end
+   end
 
-   
-      end 
+   def update
+      if @recipe.update(recipe_params)
+         redirect_to recipe_path(@recipe)
+      else 
+          flash.now[:error] = @recipe.errors.full_messages
+          render :edit
+      end
+   end 
+
+end 
    
