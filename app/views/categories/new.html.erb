@@ -6,14 +6,33 @@
     <%= f.text_field :name %>
   </div>
 
-  <%= f.fields_for :recipe, @category.recipe do |m| %>
+  <%= f.fields_for :recipes, @category.recipes do |r| %>
     <br>
     <div>
-      <%= m.label :title %>
-      <%= m.text_field :title %>
+      <%= r.label :title %>
+      <%= r.text_field :title %>
     </div>
+    <br>
+      <h3>Add Ingredients</h3>
+    <%= f.fields_for :ingredients do |inner_form| %>
+    <br>
+    <div>
+    <%= inner_form.label :item %>
+    <%= inner_form.text_field :item %><br/>
+    <br>
+    <%= inner_form.label :quantity %>
+    <%= inner_form.text_field :quantity %><br/>
+    </div>
+    <% end %>
+    <br><br>
+    
+   <div>
+    <%= f.label :instructions %>
+    <%= f.text_field :instructions %>
+  </div>
 
   <% end %>
+
   <br><br>
   <%= f.submit "Create category" %>
 <% end %>
