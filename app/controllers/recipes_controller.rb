@@ -11,19 +11,19 @@ class RecipesController < ApplicationController
 
    def new
       @recipe = Recipe.new
-      @recipe.ingredients.build(name: "First Ingredient")
-      @recipe.ingredients.build(name: "Second Ingredient")
-      @recipe.ingredients.build(name: "Third Ingredient")
-      @recipe.ingredients.build(name: "Fourth Ingredient")
-      @recipe.ingredients.build(name: "Fith Ingredient")
-      @recipe.ingredients.build(name: "Sixth Ingredient")
-      @recipe.ingredients.build(name: "Seventh Ingredient")
-      @recipe.ingredients.build(name: "Eighth Ingredient")
-      @recipe.equipment.build(name: "First Tool")
-      @recipe.equipment.build(name: "Second Tool")
-      @recipe.equipment.build(name: "Third Tool")
-      @recipe.equipment.build(name: "Fourth Tool")
-      @recipe.equipment.build(name: "Fith Tool")
+      @recipe.ingredients.build(item: "First Ingredient")
+      @recipe.ingredients.build(item: "Second Ingredient")
+      @recipe.ingredients.build(item: "Third Ingredient")
+      @recipe.ingredients.build(item: "Fourth Ingredient")
+      @recipe.ingredients.build(item: "Fith Ingredient")
+      @recipe.ingredients.build(item: "Sixth Ingredient")
+      @recipe.ingredients.build(item: "Seventh Ingredient")
+      @recipe.ingredients.build(item: "Eighth Ingredient")
+      @recipe.equipment.build(tool: "First Tool")
+      @recipe.equipment.build(tool: "Second Tool")
+      @recipe.equipment.build(tool: "Third Tool")
+      @recipe.equipment.build(tool: "Fourth Tool")
+      @recipe.equipment.build(tool: "Fith Tool")
    end
     
    def create
