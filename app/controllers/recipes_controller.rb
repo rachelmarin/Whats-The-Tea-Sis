@@ -39,8 +39,8 @@ class recipesController < ApplicationController
       @recipe.destroy
       flash[:notice] = "#{@recipe.title} was deleted"
       redirect_to recipes_path           
-  end
-end
+     end
+   end
 
 
 end 
