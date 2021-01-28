@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root(to: "static#home")
+  root(to: "application#home")
   
   devise_for :users
   resources :recipes
