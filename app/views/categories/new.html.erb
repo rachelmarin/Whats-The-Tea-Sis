@@ -1,0 +1,19 @@
+<h1>Create Tea Category</h1>
+
+<%= form_for @category do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= f.fields_for :recipe, @category.recipe do |m| %>
+    <br>
+    <div>
+      <%= m.label :title %>
+      <%= m.text_field :title %>
+    </div>
+
+  <% end %>
+  <br><br>
+  <%= f.submit "Create category" %>
+<% end %>
