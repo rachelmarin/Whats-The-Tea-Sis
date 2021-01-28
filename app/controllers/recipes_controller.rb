@@ -13,7 +13,16 @@ class recipesController < ApplicationController
          @recipe = Recipe.new
         end
     
- 
+        def create
+         @recipe = Recipe.new(recipe_params)
+      if @recipe.save
+         redirect_to recipes_path
+      else
+         flash.now[:error] = @recipe.errors.full_messages
+         render :new
+  end
+
+
    
       end 
    
