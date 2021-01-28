@@ -49,7 +49,7 @@ class RecipesController < ApplicationController
        :title,
        :category_id,
        category_attributes: [:type]
-    ) )       
+    )       
    end
    
    def find_recipe
