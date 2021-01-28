@@ -51,6 +51,10 @@ class recipesController < ApplicationController
        category_attributes: [:type]
     ) )       
    end
+   
+   def find_recipe
+      @recipe = Recipe.find_by_id(params[:id])
+    end
 
 end 
    
