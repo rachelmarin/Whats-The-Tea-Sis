@@ -8,9 +8,21 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
+   </head>
   <body>
+    <nav>
+      <ul> 
+        <li><%= link_to("Home", root_path) %></li>
+        <li><%= link_to("Tea Recipe List", recipes_path) %></li>
+        <li><%= link_to("New Tea Recipe", new_recipe_path) %></li>
+      </ul>
+    </nav>
+    <% if flash[:error] %>
+      <% flash[:error].each do |error| %>
+        <p><%= error %></p>
+        <% end %>
+      <% end %>
+      <%= content_tag("p", flash[:notice]) if flash[:notice] %>
     <%= yield %>
   </body>
 </html>
