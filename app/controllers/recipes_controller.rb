@@ -11,6 +11,19 @@ class RecipesController < ApplicationController
 
    def new
       @recipe = Recipe.new
+      @recipe.ingredients.build(name: "First Ingredient")
+      @recipe.ingredients.build(name: "Second Ingredient")
+      @recipe.ingredients.build(name: "Third Ingredient")
+      @recipe.ingredients.build(name: "Fourth Ingredient")
+      @recipe.ingredients.build(name: "Fith Ingredient")
+      @recipe.ingredients.build(name: "Sixth Ingredient")
+      @recipe.ingredients.build(name: "Seventh Ingredient")
+      @recipe.ingredients.build(name: "Eighth Ingredient")
+      @recipe.equipment.build(name: "First Tool")
+      @recipe.equipment.build(name: "Second Tool")
+      @recipe.equipment.build(name: "Third Tool")
+      @recipe.equipment.build(name: "Fourth Tool")
+      @recipe.equipment.build(name: "Fith Tool")
    end
     
    def create
@@ -48,7 +61,9 @@ class RecipesController < ApplicationController
       params.require(:recipe).permit(
        :title,
        :category_id,
-       category_attributes: [:type]
+       category_attributes: [ :type],
+       ingredient_attributes: [ :item, :quantity ],
+       equipment_attributes: [ :tool]
     )       
    end
    
