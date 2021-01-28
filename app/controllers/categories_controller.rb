@@ -2,8 +2,6 @@ class CategoriesController < ApplicationController
 
     def new  
         @category = category.new
-
-
         @category.recipes.build
         @category.recipes.build
         @category.recipes.build
@@ -24,7 +22,7 @@ class CategoriesController < ApplicationController
 
     def category_params
       params.require(:category).permit(
-        :type,
+        :name,
         recipes_attributes: [:title, :instructions]
       )
     end
