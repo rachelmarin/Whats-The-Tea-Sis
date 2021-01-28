@@ -7,9 +7,9 @@ class Recipe < ApplicationRecord
     has_many :equipments
     has_many :ingredients 
   
-  # accepts_nested_attributes_for :ingredient
-  # accepts_nested_attributes_for :equipment
-  # accepts_nested_attributes_for :category, reject_if: :all_blank
+   accepts_nested_attributes_for :ingredients
+   accepts_nested_attributes_for :equipment
+   accepts_nested_attributes_for :category, reject_if: :all_blank
 
   def category_name
     self.category ? self.category.name : "category not available"
