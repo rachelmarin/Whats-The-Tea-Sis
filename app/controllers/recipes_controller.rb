@@ -1,11 +1,13 @@
 class RecipesController < ApplicationController
-    before_action :authenticate_user!
     before_action :find_category, only: [:index, :new, :create]
     before_action :find_recipe, only: [:show, :edit, :update, :destroy ]  
    def index
+      if @category
+         @recipe = @category.recipe
+      else
        @recipes = Recipe.all    
+      end
    end
-   
    def show
        
    end
@@ -64,7 +66,6 @@ class RecipesController < ApplicationController
       @recipe.destroy
       flash[:notice] = "#{@recipe.title} was deleted"
       redirect_to recipes_path           
-     end
    end
 
    private
@@ -82,13 +83,11 @@ class RecipesController < ApplicationController
    def recipe_params
       params.require(:recipe).permit(
        :title,
+       :instructions,
        :category_id,
        category_attributes: [:name],
-       ingredient_attributes: [:item, :quantity],
-       :instructions
+       ingredient_attributes: [:item, :quantity]
     )       
    end
-   
-
 end 
    
