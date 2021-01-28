@@ -11,18 +11,22 @@ class RecipesController < ApplicationController
    end
 
    def new
-      @recipe = Recipe.new
+      if @category
+         @recipe = @category.recipe.build
+         render :new_category_recipe
+      else
+         @recipe = Recipe.new
 
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
-      @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(item: "")
+      end
    end
-    
    def create
          @recipe = Recipe.new(recipe_params)
       if @recipe.save
