@@ -6,14 +6,14 @@
 
   <h3>Select Category</h3>
   <div>
-    <%= f.collection_select :category_id, Category.all, :id, :type, include_blank: "Select Category" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>
   </div>
 
   <h3>Or Create category</h3>
-  <%= f.fields_for :category, recipe.build_category do |gb| %>
+  <%= f.fields_for :category, @recipe.build_category do |category_builder| %>
     <div>
-      <%= gb.label :type %>
-      <%= gb.text_field :type %>
+      <%= category_builder.label :name %>
+      <%= category_builder.text_field :name %>
     </div>
     
     <h3>Add Ingredients</h3>
