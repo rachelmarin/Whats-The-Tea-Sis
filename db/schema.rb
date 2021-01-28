@@ -28,13 +28,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_000800) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "equipments", force: :cascade do |t|
-    t.string "tool"
-    t.integer "recipe_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "ingredients", force: :cascade do |t|
     t.string "item"
     t.string "quantity"

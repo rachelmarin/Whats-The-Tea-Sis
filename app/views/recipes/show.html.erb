@@ -8,13 +8,7 @@
   <li><%= "#{ingredient.item} X #{ingredient.quantity}" %></li>
 <% end %>
 </ul>
-    <h3>Equipment Nedded</h3>
 
-<ul>
-<% @recipe.equipments.each do |equipment| %>
-  <li><%= "#{equipment.tool}" %></li>
-<% end %>
-</ul>
     <p>Intructions: <%= @recipe.instructions %></p>
   
 
