@@ -10,7 +10,7 @@
   </div>
 
   <h3>Or Create category</h3>
-  <%= f.fields_for :category, @recipe.build_category do |category_builder| %>
+  <%= f.fields_for :category, recipe.build_category do |category_builder| %>
     <div>
       <%= category_builder.label :name %>
       <%= category_builder.text_field :name %>

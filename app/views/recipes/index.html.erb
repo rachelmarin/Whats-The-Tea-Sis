@@ -1,7 +1,5 @@
 <h1> Tea Recipe List </h1>
 
 <ul> 
-<% @recipes.each do |recipe| %>
-    <li><%= link_to recipe.title, recipe_path(recipe) %></li>
-<% end %>
+<%= render @recipes %>
 </ul>
