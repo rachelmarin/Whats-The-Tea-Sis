@@ -63,7 +63,7 @@ class RecipesController < ApplicationController
        :category_id,
        category_attributes: [ :type],
        ingredient_attributes: [ :item, :quantity ],
-       equipment_attributes: [ :tool]
+       equipments_attributes: [ :tool]
     )       
    end
    
