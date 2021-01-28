@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
+    before_action :authenticate_user!
+    before_action :find_category, only: [:index, :new, :create]
     before_action :find_recipe, only: [:show, :edit, :update, :destroy ]  
-   
    def index
        @recipes = Recipe.all    
    end
@@ -11,6 +12,7 @@ class RecipesController < ApplicationController
 
    def new
       @recipe = Recipe.new
+
       @recipe.ingredients.build(item: "")
       @recipe.ingredients.build(item: "")
       @recipe.ingredients.build(item: "")
@@ -24,14 +26,25 @@ class RecipesController < ApplicationController
    def create
          @recipe = Recipe.new(recipe_params)
       if @recipe.save
-         redirect_to recipes_path
+         #if valid
+         if @category
+            redirect_to category_recipe_path(@category)
+         else   
+            redirect_to recipes_path
+         end
       else
+         #if not valid
          flash.now[:error] = @recipe.errors.full_messages
-         render :new
+         
+         if @category
+            render :new_category_recipe
+         else
+            render :new
+         end
+      end
    end
 
-   def edit
-           
+   def edit       
    end
 
    def update
@@ -52,18 +65,26 @@ class RecipesController < ApplicationController
 
    private
    
+   def find_recipe
+      @recipe = Recipe.find_by_id(params[:id])
+    end
+
+    def find_category
+      if params[:category_id]
+        @category = Category.find_by_id(params[:category_id])
+      end
+    end
+
    def recipe_params
       params.require(:recipe).permit(
        :title,
        :category_id,
+       category_attributes: [:name],
        ingredient_attributes: [:item, :quantity],
-       category_attributes: [:name]
+       :instructions
     )       
    end
    
-   def find_recipe
-      @recipe = Recipe.find_by_id(params[:id])
-    end
 
 end 
    
