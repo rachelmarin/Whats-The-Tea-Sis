@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_000800) do
+ActiveRecord::Schema.define(version: 2021_01_29_044200) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -28,20 +28,30 @@ ActiveRecord::Schema.define(version: 2021_01_28_000800) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "ingredients", force: :cascade do |t|
-    t.string "item"
-    t.string "quantity"
-    t.integer "recipe_id"
+  create_table "directions", force: :cascade do |t|
+    t.text "step"
+    t.integer "recipe_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_directions_on_recipe_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.string "quantity"
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
     t.string "title"
-    t.text "instructions"
+    t.text "description"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +70,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_000800) do
 
   add_foreign_key "comments", "recipes"
   add_foreign_key "comments", "users"
+  add_foreign_key "directions", "recipes"
+  add_foreign_key "ingredients", "recipes"
 end
