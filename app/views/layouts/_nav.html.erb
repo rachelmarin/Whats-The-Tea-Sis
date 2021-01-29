@@ -1,9 +1,8 @@
- <nav>
-      <ul> 
-        <li><%= link_to("Home", root_path) %></li>
-        <li><%= link_to("Login", new_user_session_path) %></li>
-        <li><%= link_to("Signup", new_user_registration_path) %></li>
-        <li><%= link_to("Tea Recipe List", recipes_path) %></li>
-        <li><%= link_to("New Tea Recipe", new_recipe_path) %></li>
-      </ul>
+ <nav class="<%= navbar_color %>">
+   <div class="container">
+    <%= link_to("Home", root_path, class: "brand-logo") %>
+    <ul class="right">
+      <%= render_nav_links %>
+    </ul>
+      </div>
     </nav>
