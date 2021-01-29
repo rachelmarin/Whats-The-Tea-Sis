@@ -3,7 +3,7 @@ module ApplicationHelper
       content_tag("ul", class: "right") do
         if user_signed_in? 
             content_tag("li") do
-              link_to("Recipes", recipes_path)
+              link_to("Tea Recipes", recipes_path)
             end + 
             content_tag("li") do
               link_to("Create Recipe", new_recipe_path)
