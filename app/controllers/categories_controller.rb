@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
       params.require(:category).permit(
         :name,
         recipes_attributes: [:title, :instructions],
-        ingredient_attributes: [:item, :quantity]
+        ingredient_attributes: [:name, :quantity]
       )
     end
 end

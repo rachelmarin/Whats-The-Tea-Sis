@@ -1,21 +1,20 @@
 <h1><%= @recipe.title %></h1>
-    <p>Category: <%= category_name(@recipe) %></p>
+    <p>Category: <%= @recipe.category_name %></p>
     
     <h3>Ingredients</h3>
 
 <ul>
 <% @recipe.ingredients.each do |ingredient| %>
-  <li><%= "#{ingredient.item} X #{ingredient.quantity}" %></li>
+  <li><%= "#{ingredient.name} X #{ingredient.quantity}" %></li>
 <% end %>
 </ul>
 
     <p>Intructions: <%= @recipe.instructions %></p>
   
-
-    Comments:
-  <% @recipe.comments.each do |comment| %>
-    <%= link_to comment.user.username, user_path(comment.user) %> said
-    <%= comment.content %>
-
+  <% if @recipe.user == current_user %>
     <%= link_to "Edit", edit_recipe_path(@recipe) %>
     <%= link_to "Delete", recipe_path(@recipe), method: "delete" %>
+
+<% end %>
+
+

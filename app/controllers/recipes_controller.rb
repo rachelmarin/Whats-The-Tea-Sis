@@ -18,20 +18,20 @@ class RecipesController < ApplicationController
          @recipe = @category.recipe.build
          render :new_category_recipe
       else
-         @recipe = Recipe.new
+         @recipe = current_user.recipes.build
 
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
-         @recipe.ingredients.build(item: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.build(name: "")
       end
    end
    def create
-         @recipe = Recipe.new(recipe_params)
+         @recipe = current_user.recipes.build(recipe_params)
       if @recipe.save
          #if valid
          if @category
@@ -72,7 +72,7 @@ class RecipesController < ApplicationController
    private
    
    def find_recipe
-      @recipe = Recipe.find_by_id(params[:id])
+      @recipe = Recipe.find(params[:id])
     end
 
     def find_category
@@ -87,7 +87,7 @@ class RecipesController < ApplicationController
        :instructions,
        :category_id,
        category_attributes: [:name],
-       ingredient_attributes: [:item, :quantity]
+       ingredient_attributes: [:name, :quantity]
     )       
    end
 end 
