@@ -15,14 +15,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>         
   </head>
   
-  <body class="green lighten-5">
+ <body class="green lighten-5">
+
+   <%= render partial: "layouts/nav", locals: { navbar_color: "teal accent-4" } %>
+   <%= render "layouts/errors" %>
+    
     <div class="container">
-      <%= yield %>
-      <ul>
-        <li><%= link_to "Tea Recipes", recipes_path %></li>
-        <li><%= link_to "Login", new_user_session_path %></li>
-        <li><%= link_to "Signup", new_user_registration_path %></li>
-      </ul>
+    <%= yield %>
     </div>
   </body>
 </html>
