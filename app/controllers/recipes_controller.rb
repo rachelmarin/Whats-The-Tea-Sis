@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
     before_action :find_category, only: [:index, :new, :create]
-    before_action :find_recipe, only: [:show, :edit, :update, :destroy ]  
+    before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
+    layout "recipes_layout"  
    def index
       if @category
          @recipe = @category.recipe
