@@ -1,14 +1,13 @@
-<%= form_for recipe do |f| %>
+<%= form_for @recipe do |f| %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
 
   <h3>Select Category</h3>
-  <div>
     <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>
   </div>
-
+<br>
   <h3>Or Create category</h3>
   <%= f.fields_for :category, recipe.build_category do |category_builder| %>
     <div>
@@ -16,28 +15,49 @@
       <%= category_builder.text_field :name %>
     </div>
     
-    <h3>Add Ingredients</h3>
-    <%= f.fields_for :ingredients do |inner_form| %>
     <br>
-    <div>
-    <%= inner_form.label :name %>
-    <%= inner_form.text_field :name %><br/>
-    <br>
-    <%= inner_form.label :quantity %>
-    <%= inner_form.text_field :quantity %><br/>
-    </div>
-    <% end %>
-    <br><br>
 
-    <h3>Add Instructions</h3>
+    <h3>Add description</h3>
    <div>
-    <%= f.label :instructions %>
-    <%= f.text_field :instructions %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
   </div>
 
   <% end %>
 
   <br><br>
+    <h3>Add Ingredients</h3>
+      <div>
+    <p><strong>ingredients:</strong></p>
+
+    <div id="Ingredients">
+      <%= f.fields_for :ingredients do |ingredient| %>
+        <%= render 'ingredient_fields', f: ingredient %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'add ingredient', f, :ingredients %>
+      </div>
+    </div>
+  </div>
+    
+    <br><br>
+ 
+<h3>Add Directions</h3>
+      <div>
+    <p><strong>directions:</strong></p>
+
+    <div id="Directions">
+      <%= f.fields_for :directions do |direction| %>
+        <%= render 'direction_fields', f: direction %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'add direction', f, :directions %>
+      </div>
+    </div>
+  </div>
+    <br>
 
   <%= f.submit button_name %>
 

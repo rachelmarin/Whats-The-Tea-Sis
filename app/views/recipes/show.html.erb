@@ -1,19 +1,32 @@
 <h1><%= @recipe.title %></h1>
-    <p>Category: <%= @recipe.category_name %></p>
-    
-    <h3>Ingredients</h3>
-
-<ul>
-<% @recipe.ingredients.each do |ingredient| %>
-  <li><%= "#{ingredient.name} X #{ingredient.quantity}" %></li>
-<% end %>
-</ul>
-
-    <p>Intructions: <%= @recipe.instructions %></p>
+    <p>
+      <strong>Category:</strong> 
+      <%= @recipe.category_name %>
+    </p>
+  <br>
+    <p>
+      <strong>Description:</strong> 
+      <%= @recipe.description %>
+    </p>
+  <br>
+    <h4> Ingredients </h4>
+      <ul>
+        <% for @ingredients in @recipe.ingredients %>
+        <li><%= @ingredient.name %></li>
+      <%end%>
+    </ul>
+<br>
+      <h4> Directions </h4>
+        <ul>
+          <% for @directions in @recipe.directions %>
+          <li><%= @direction.step %></li>
+      <% end %>
+    </ul>
+<br>
   
   <% if @recipe.user == current_user %>
-    <%= link_to "Edit", edit_recipe_path(@recipe) %>
-    <%= link_to "Delete", recipe_path(@recipe), method: "delete" %>
+  <%= link_to "Edit", edit_recipe_path(@recipe) %>
+  <%= link_to "Delete", recipe_path(@recipe), method: "delete" %>
 
 <% end %>
 

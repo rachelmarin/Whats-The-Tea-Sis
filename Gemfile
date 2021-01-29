@@ -57,5 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # for layout
 gem 'cocoon', '~> 1.2.6'
-gem 'paperclip', '~> 4.2.0'
 gem 'simple_form'
+gem 'bootstrap', '~> 5.0.0.beta1'
+gem 'jquery-rails'

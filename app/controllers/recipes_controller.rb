@@ -21,13 +21,8 @@ class RecipesController < ApplicationController
          @recipe = current_user.recipes.build
 
          @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
-         @recipe.ingredients.build(name: "")
+             
+         @recipe.directions.build(step: "")
       end
    end
    def create
@@ -84,10 +79,11 @@ class RecipesController < ApplicationController
    def recipe_params
       params.require(:recipe).permit(
        :title,
-       :instructions,
+       :description,
        :category_id,
        category_attributes: [:name],
-       ingredient_attributes: [:name, :quantity]
+       ingredient_attributes: [:id, :name, :quantity, :_destroy],
+       direction_attributes: [:id, :step, :_destroy]
     )       
    end
 end 
