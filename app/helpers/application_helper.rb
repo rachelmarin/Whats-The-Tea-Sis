@@ -1,7 +1,7 @@
 module ApplicationHelper
     def render_nav_links
       content_tag("ul", class: "right") do
-        if user_signed_in? # is logged in
+        if user_signed_in? 
             content_tag("li") do
               link_to("Recipes", recipes_path)
             end + 
