@@ -1,0 +1,7 @@
+<h1><%= @user.username %> comments:</h1>
+
+<% @user.recipes.each do |recipe|%>
+  <p>
+    <%= link_to recipe.title, recipe_path(recipe) %>
+  </p>
+<% end %>

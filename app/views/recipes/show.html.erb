@@ -27,7 +27,43 @@
   <% if @recipe.user == current_user %>
   <%= link_to "Edit", edit_recipe_path(@recipe) %>
   <%= link_to "Delete", recipe_path(@recipe), method: "delete" %>
-
+<br><br>
 <% end %>
+<ul>
+<% @recipe.comments.each do |comment| %>
+  <li>
+    <%= comment.user.username %> says: <%= comment.content %>
+  </li>
+<% end %>
+</ul>
+
+Commentors:
+<ul>
+<% @recipe.users.distinct.each do |user| %>
+  <li>
+    <%= link_to user.username, user_path(user) %>
+  </li>
+<% end %>
+</ul>
+
+<%= form_for @recipe.comments.build do |f| %>
+  <%= f.hidden_field :recipe_id %>
+  <p>
+    <%= f.collection_select :user_id, User.all, :id, :username %>
+  </p>
+
+  <%= f.fields_for :user, User.new do |user_fields| %>
+    <%= user_fields.label :username %>
+    <%= user_fields.text_field :username %>
+  <% end %>
+  
+  <p>
+    <%= f.label :content, "New Comment" %><br>
+    <%= f.text_area :content %>
+  </p>
+  <br/>
+  <%= f.submit %>
+<% end %>
+
 
 

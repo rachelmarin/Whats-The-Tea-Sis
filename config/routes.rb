@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   root(to: "static#home")
   
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :recipes
   resources :comments
   resources :categories do
