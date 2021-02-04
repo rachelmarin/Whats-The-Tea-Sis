@@ -1,14 +1,15 @@
 <%= form_for @recipe do |f| %>
-  <div>
+  <div class="center-align">
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
 
-  <h3>Select Category</h3>
+  <h5 class="grey-text text-darken-2">Select Category</h5>
+  <div class="center-align">
     <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>
   </div>
 <br>
-  <h3>Or Create category</h3>
+  <h5 class="grey-text text-darken-2">Or Create category</h5>
   <%= f.fields_for :category, recipe.build_category do |category_builder| %>
     <div>
       <%= category_builder.label :name %>
@@ -17,7 +18,7 @@
     
     <br>
 
-    <h3>Add description</h3>
+    <h5 class="grey-text text-darken-2">Add description</h5>
    <div>
     <%= f.label :description %>
     <%= f.text_field :description %>
@@ -26,10 +27,9 @@
   <% end %>
 
   <br><br>
-    <h3>Add Ingredients</h3>
+    <h5 class="grey-text text-darken-2">Add Ingredients</h5>
       <div>
-    <p><strong>ingredients:</strong></p>
-
+    
     <div id="Ingredients">
       <%= f.fields_for :ingredients do |ingredient| %>
         <%= render 'ingredient_fields', f: ingredient %>
@@ -43,9 +43,8 @@
     
     <br><br>
  
-<h3>Add Directions</h3>
+<h5 class="grey-text text-darken-2">Add Directions</h5>
       <div>
-    <p><strong>directions:</strong></p>
 
     <div id="Directions">
       <%= f.fields_for :directions do |direction| %>

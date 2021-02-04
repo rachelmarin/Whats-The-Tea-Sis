@@ -1,34 +1,36 @@
-<h1><%= @recipe.title %></h1>
-    <p>
-      <strong>Category:</strong> 
+<br><br>
+<h1 class="grey-text text-darken-2"><%= @recipe.title %></h1>
+    <p class="grey-text text-darken-2">
+      <strong class="grey-text text-darken-2">Category:</strong> 
       <%= @recipe.category_name %>
     </p>
-  <br>
-    <p>
-      <strong>Description:</strong> 
+
+    <p class="grey-text text-darken-2">
+      <strong class="grey-text text-darken-2">Description:</strong> 
       <%= @recipe.description %>
     </p>
-  <br>
-    <h4> Ingredients </h4>
+  
+    <h4 class="grey-text text-darken-2"> Ingredients </h4>
       <ul>
         <% for @ingredients in @recipe.ingredients %>
-        <li><%= @ingredient.name %></li>
+        <li class="grey-text text-darken-2"><%= @ingredients.name %></li>
       <%end%>
     </ul>
 <br>
-      <h4> Directions </h4>
+      <h4 class="grey-text text-darken-2"> Directions </h4>
         <ul>
           <% for @directions in @recipe.directions %>
-          <li><%= @direction.step %></li>
+          <li class="grey-text text-darken-2"><%= @directions.step %></li>
       <% end %>
     </ul>
 <br>
   
-  <% if @recipe.user == current_user %>
-  <%= link_to "Edit", edit_recipe_path(@recipe) %>
-  <%= link_to "Delete", recipe_path(@recipe), method: "delete" %>
-<br><br>
+<% if @recipe.user == current_user %>
+  <a class="waves-effect waves-light btn-small"><%= button_to "Edit", edit_recipe_path(@recipe) %></a>
+  <a class="waves-effect waves-light btn-small"><%= button_to "Delete", recipe_path(@recipe), method: "delete" %></a>
 <% end %>
+<ul>
+
 <ul>
 <% @recipe.comments.each do |comment| %>
   <li>
@@ -64,6 +66,3 @@ Commentors:
   <br/>
   <%= f.submit %>
 <% end %>
-
-
-
