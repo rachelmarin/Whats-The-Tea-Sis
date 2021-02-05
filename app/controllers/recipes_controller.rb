@@ -2,31 +2,42 @@ class RecipesController < ApplicationController
     before_action :find_category, only: [:index, :new, :create]
     before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
     layout "recipes_layout"  
-   def index
+   
+    def index
       if @category
          @recipe = @category.recipe
       else
-       @recipes = Recipe.all    
+       @recipes = Recipe.all.alphabetize    
       end
+      if @comment 
+         @recipes = @comment.recipes
+       end
    end
+
    def show
-       
+      if @category
+         redirect_to category_recipe_path(@category) 
+       end 
+       if @comment
+         redirect_to recipe_path(@recipe)
+       end
    end
 
    def new
       if @category
-         @recipe = @category.recipe.build
+         @recipe = @category.recipe.new
          render :new_category_recipe
       else
-         @recipe = current_user.recipes.build
+         @recipe = Recipe.new
 
-         @recipe.ingredients.build(name: "")
+         @recipe.ingredients.new(name: "")
              
-         @recipe.directions.build(step: "")
+         @recipe.directions.new(step: "")
       end
    end
+
    def create
-         @recipe = current_user.recipes.build(recipe_params)
+         @recipe = Recipe.new(recipe_params)
       if @recipe.save
          #if valid
          if @category
@@ -82,8 +93,8 @@ class RecipesController < ApplicationController
        :description,
        :category_id,
        category_attributes: [:name],
-       ingredient_attributes: [:id, :name, :quantity, :_destroy],
-       direction_attributes: [:id, :step, :_destroy]
+       ingredients_attributes: [:id, :name, :quantity, :_destroy],
+       directions_attributes: [:id, :step, :_destroy]
     )       
    end
 end 
