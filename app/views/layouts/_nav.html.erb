@@ -1,16 +1,10 @@
  <nav class="<%= navbar_color %>">
   <ul class="container">
         <li><%= link_to("Home", root_path) %></li>
-    <% if user_signed_in? %>
         <li><%= link_to("Tea Recipes", recipes_path) %></li>
         <li><%= link_to("Create Recipe", new_recipe_path) %></li>
-        <li class="waves-effect waves-light btn-small">
-        <%= button_to "Logout", destroy_user_session_path, method: :delete %></li>
-   <% else %>     
-        <li><%= link_to("Login", new_user_session_path) %></li>
-        <li><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></li>
-        <li><%= link_to("Signup", new_user_registration_path) %></li>
+        <li><%= link_to("Crategory", categories_path) %></li>
        </ul>
     </nav>
-     <% end %>
+   
    

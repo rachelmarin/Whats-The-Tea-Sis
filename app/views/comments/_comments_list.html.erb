@@ -1,0 +1,6 @@
+  
+<% comments.each do |comment| %>
+<div>
+    <p><%= link_to comment.user.first_name, user_path(comment.user) %> says: <%= link_to comment.content, edit_recipe_comment_path(comment.user) %> </p>
+</div>
+<% end %>

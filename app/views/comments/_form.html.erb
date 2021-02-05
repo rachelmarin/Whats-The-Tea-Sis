@@ -1,0 +1,6 @@
+<%= form_for [comment] do |f| %>
+  <div>
+    <p>Comment: <%= f.text_area :content %></p>
+    <%= f.submit button_name:"Add Comment", class: "custom_button"%>
+  </div>
+<% end %>

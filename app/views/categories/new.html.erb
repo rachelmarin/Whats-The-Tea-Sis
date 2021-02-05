@@ -1,38 +1,14 @@
-<h1>Create Tea Category</h1>
+<h3>Create Category</h3>
 
 <%= form_for @category do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>
-  </div>
-
-  <%= f.fields_for :recipes, @category.recipes do |r| %>
-    <br>
-    <div>
-      <%= r.label :title %>
-      <%= r.text_field :title %>
-    </div>
-    <br>
-      <h3>Add Ingredients</h3>
-    <%= f.fields_for :ingredients do |inner_form| %>
-    <br>
-    <div>
-    <%= inner_form.label :name %>
-    <%= inner_form.text_field :name %><br/>
-    <br>
-    <%= inner_form.label :quantity %>
-    <%= inner_form.text_field :quantity %><br/>
-    </div>
-    <% end %>
-    <br><br>
+  </div> 
     
-   <div>
-    <%= f.label :instructions %>
-    <%= f.text_field :instructions %>
-  </div>
-
+    <%= f.submit %>
   <% end %>
+  <br>
 
-  <br><br>
-  <%= f.submit "Create category" %>
-<% end %>
+
+  

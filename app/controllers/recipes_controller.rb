@@ -50,7 +50,7 @@ class RecipesController < ApplicationController
          flash.now[:error] = @recipe.errors.full_messages
          
          if @category
-            render :new_category_recipe
+            render :new_category_recipe_path
          else
             render :new
          end
