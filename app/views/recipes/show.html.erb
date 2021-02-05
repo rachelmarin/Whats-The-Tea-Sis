@@ -15,6 +15,7 @@
         <% for @ingredients in @recipe.ingredients %>
         <li class="grey-text text-darken-2"><%= @ingredients.name %></li>
     </ul>
+    <% end %>
 <br>
       <h4 class="grey-text text-darken-2"> Directions </h4>
         <ul>
@@ -23,15 +24,15 @@
     </ul>
       <%end%>
 <br>
+<div>
   <% if @recipe.users == current_user %>
   <a class="waves-effect waves-light btn-small"><%= button_to "Edit", edit_recipe_path(@recipe) %></a>
   <a class="waves-effect waves-light btn-small"><%= button_to "Delete", recipe_path(@recipe), method: "delete" %></a>
-
+</div>
 
 <h5 style="font-size:1.45rem">● Recipe Comments:</h5>
 <div style="margin-left:25px;">
   <%= render partial: 'comments/comments_list', locals: {comments: @recipe.comments, recipe: @recipe} if @recipe.comments %>
-  
 </div>
 <br>
 
@@ -42,6 +43,5 @@
   <br>
   <br>
 
-<% end %>
 
-<% end %>
+    <% end %>
