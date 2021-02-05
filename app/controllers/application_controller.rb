@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :exception
+  helper_method :user_signed_in?, :current_user
 
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :username, :email])
+  def user_signed_in?
+    !!session[:user_id]
   end
-end
 
-def configure_permitted_parameters
-  devise_parameter_sanitizer.permit(:sign_in) do |user_params|
-    user_params.permit(:username, :email)
+  def current_user
+    User.find_by_id(session[:user_id]) if user_signed_in?
   end
-end
+
+  def login_user
+    session[:user_id] = @user.id
+  end
 end

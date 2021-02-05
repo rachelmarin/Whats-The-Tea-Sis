@@ -1,10 +1,15 @@
- <nav class="<%= navbar_color %>">
+ <nav>
   <ul class="container">
         <li><%= link_to("Home", root_path) %></li>
+         <% if user_signed_in? %>
         <li><%= link_to("Tea Recipes", recipes_path) %></li>
         <li><%= link_to("Create Recipe", new_recipe_path) %></li>
-        <li><%= link_to("Crategory", categories_path) %></li>
+        <li><%= link_to("Category", categories_path) %></li>
+       <li><%= button_to "Logout", destroy_user_session_path, method: :delete %></li>
+      <% else %>     
+        <li><%= link_to("Login", login_path) %></li>
+        <li><%= link_to("Signup", signup_path) %></li>
        </ul>
     </nav>
-   
+    <% end %>
    

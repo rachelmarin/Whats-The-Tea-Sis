@@ -1,0 +1,14 @@
+<h3>Login</h3>
+
+<%= form_tag login_path do %>
+  <div class="input-field">
+    <%= email_field_tag :email, nil, autofocus: true %>
+    <%= label_tag :email %>
+  </div>
+  <div class="input-field">
+    <%= password_field_tag :password, nil %>
+    <%= label_tag :password %>
+  </div>
+
+  <%= submit_tag "Login", class: "btn-small indigo darken-3" %>
+<% end %>
