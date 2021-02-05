@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-    before_action :find_category, only: [:index, :new, :create]
+   before_action :find_category, only: [:index, :new, :create]
     before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
     layout "recipes_layout"  
    
@@ -25,19 +25,19 @@ class RecipesController < ApplicationController
 
    def new
       if @category
-         @recipe = @category.recipe.new
+         @recipe = @category.recipes.build
          render :new_category_recipe
       else
-         @recipe = Recipe.new
+         @recipe = current_user.recipes.build
 
-         @recipe.ingredients.new(name: "")
+         @recipe.ingredients.build(name: "")
              
-         @recipe.directions.new(step: "")
+         @recipe.directions.build(step: "")
       end
    end
 
    def create
-         @recipe = Recipe.new(recipe_params)
+      @recipe = current_user.recipes.build(recipe_params)
       if @recipe.save
          #if valid
          if @category
@@ -85,6 +85,10 @@ class RecipesController < ApplicationController
       if params[:category_id]
         @category = Category.find_by_id(params[:category_id])
       end
+    end
+    
+    def alphabetize
+      order(title: :asc)
     end
 
    def recipe_params

@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   
   
   root(to: "static#home")
+  resources :comments, only: [:destroy, :new, :update]
+  resources :recipes
   
-  
-  resources :recipes 
+  resources :recipes do
   resources :comments
-  
+  end 
   resources :categories do
     resources :recipes
   end

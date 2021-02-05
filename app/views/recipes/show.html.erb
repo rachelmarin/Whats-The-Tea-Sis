@@ -23,15 +23,14 @@
     </ul>
       <%end%>
 <br>
-  
+  <% if @recipe.users == current_user %>
   <a class="waves-effect waves-light btn-small"><%= button_to "Edit", edit_recipe_path(@recipe) %></a>
   <a class="waves-effect waves-light btn-small"><%= button_to "Delete", recipe_path(@recipe), method: "delete" %></a>
 
-<ul>
-  <br/>
-<h3>Comments</h3>
-  <div style="margin-left:25px;">
-  <%= render 'comments/comments_list', comments: @recipe.comments if @recipe.comments %>
+
+<h5 style="font-size:1.45rem">● Recipe Comments:</h5>
+<div style="margin-left:25px;">
+  <%= render partial: 'comments/comments_list', locals: {comments: @recipe.comments, recipe: @recipe} if @recipe.comments %>
   
 </div>
 <br>
@@ -43,5 +42,6 @@
   <br>
   <br>
 
+<% end %>
 
 <% end %>
