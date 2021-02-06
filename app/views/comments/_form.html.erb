@@ -1,13 +1,15 @@
-<%= form_for comment, url:url do |f| %>
-  <div>
+<%= form_for @recipe.comments.build do |f| %>
+     <div>
     <%= f.hidden_field :user_id, :value => current_user.id %>
   </div>
   <div>
-    <%= f.hidden_field :recipe_id, :value => recipe.id %>
-  </div>
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-  <%= f.submit %>
+    <%= f.hidden_field :recipe_id %>
+   </div>
+
+    <p>
+        <%= f.label 'Comment:' %><br>
+        <%= f.text_field :content %>
+    </p>
+
+    <%= f.submit %>
 <% end %>

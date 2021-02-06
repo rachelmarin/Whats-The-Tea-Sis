@@ -1,48 +1,32 @@
-  class CommentsController < ApplicationController
-    def index
-    end
-  
-    def show
-      @recipe = Recipe.find(params[:recipe_id])
-      @comment = Comment.find(params[:id])
-    end
-  
-    # /recipes/:recipe_id/comments/new 
+ class CommentsController < ApplicationController
+   
     def new
-      @recipe = Recipe.find(params[:recipe_id])
-      @comment = @recipe.comments.build
-      # comment.new(recipe_id:@recipe.id)
+      @comment = Comment.new(params[:comment])
     end
-  
+   
     def create
-      @comment = Comment.new(comment_params)
-      if @comment.save
-        # /recipes/:recipe_id/comments/:id
-        redirect_to recipe_path(params[:recipe_id], @comment)
-      else 
-        render :new 
-      end 
-    end
+      comment = Comment.new(comment_params)
+      if comment.valid?
+          comment.save
+      end
+      redirect_to comment.recipe 
+  end
   
-    def edit
-      @comment = Comment.find(params[:id])
+
+  def destroy
+    if current_user
       @recipe = Recipe.find(params[:recipe_id])
-    end
-  
-    def update
-      @comment = Comment.find(params[:id])
-      @comment.update(comment_params)
-      redirect_to recipe_path(@comment.recipe_id)
-    end
-  
-    def destory
+      @comment = @recipe.comments.find(params[:id])
       @comment.destroy
-      flash[:notice] = "#{@comment.content} was deleted"
-      redirect_to recipes_path  
-    end 
+      redirect_to recipe_path(@recipe)
+    else
+      redirect_to recipe_path(@recipe)
+    end
+  end
+  private
   
-    private 
-     def comment_params
-      params.require(:comment).permit(:content,:user_id,:recipe_id)
-     end 
+  def comment_params
+      params.require(:comment).permit(:content, :recipe_id, :user_id, user_attributes: [:username])
+  end
+
   end

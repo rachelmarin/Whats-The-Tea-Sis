@@ -6,7 +6,8 @@
         <li><%= link_to("Create Recipe", new_recipe_path) %></li>
         <li><%= link_to("Category", categories_path) %></li>
        <li><%= button_to "Logout", destroy_user_session_path, method: :delete %></li>
-      <% else %>     
+      <% else %>   
+        <li><%= link_to "Log in with Google", '/auth/google_oauth2', method: :post%> </li>
         <li><%= link_to("Login", login_path) %></li>
         <li><%= link_to("Signup", signup_path) %></li>
        </ul>

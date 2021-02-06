@@ -1,3 +1,4 @@
+
 <br><br>
 <h1 class="grey-text text-darken-2"><%= @recipe.title %></h1>
     <p class="grey-text text-darken-2">
@@ -28,11 +29,23 @@
 
 <%= link_to "Delete", recipe_path(@recipe), method: "delete" %> 
 <br><br>
-<%= link_to "Create a Comments", new_recipe_comment_path(@recipe) %>
 
-<h3> comments </h3>
-<% @recipe.comments.each do |c| %>
-    <h2><%= c.content %> -  <%= c.user.username%> </h2>
-    <%= link_to "Edit comment", edit_recipe_comment_path(@recipe.id,c.id) %>
- 
+<h3>Comments:</h3>
+<%= 'No comments yet.' if @recipe.comments.empty? %>
+
+<% @recipe.comments.each do |comment| %>
+    <p><%= link_to comment.user.username, user_path(comment.user) %><br>
+    <%= comment.content %>
+    </p>
+ <%= link_to 'Destroy Comment', [comment.recipe, comment],
+ method: :delete,
+ data: { confirm: 'Are you sure?' } %>
+
 <% end %>
+<br><br>
+
+
+<h4>Add Comment:</h4>
+<!-- We use "@recipe.comments.build" to build a new comment with an existing user_id or a new user, and comment content -->
+
+<%= render partial: "comments/form", locals: { comment: @comment, button_name: "Add Comment" } %>
