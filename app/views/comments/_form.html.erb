@@ -1,6 +1,14 @@
-<%= form_for [recipe, comment] do |f| %>
+  
+<%= form_for comment, url:url do |f| %>
   <div>
-    <p>Comment: <%= f.text_area :content %></p>
-    <%= f.submit button_name:"Add Comment", class: "custom_button"%>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
   </div>
+  <div>
+    <%= f.hidden_field :recipe_id, :value => recipe.id %>
+  </div>
+  <div>
+    <%= f.label :comment %>
+    <%= f.text_area :comment %>
+  </div>
+  <%= f.submit %>
 <% end %>
