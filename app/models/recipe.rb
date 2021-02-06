@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
     belongs_to :category
     accepts_nested_attributes_for :category, reject_if: :all_blank
      
-    has_many :comments, dependent: :destroy 
+    has_many :comments
     has_many :users, through: :comments
      
      def self.alphabetize

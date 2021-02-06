@@ -24,24 +24,15 @@
         </ul>
       <%end%>
 <br>
-<div>
-  <% if @recipe.users == current_user %>
-  <%= button_to "Edit", edit_recipe_path(@recipe) %>
-  <%= button_to "Delete", recipe_path(@recipe), method: "delete" %>
-</div>
+<%= link_to "Edit", edit_recipe_path(@recipe) %>
 
-<h5>Comments:</h5>
-<div>
-  <%= render partial: 'comments/comments_list', locals: {comments: @recipe.comments, recipe: @recipe} if @recipe.comments %>
-</div>
-<br>
+<%= link_to "Delete", recipe_path(@recipe), method: "delete" %> 
+<br><br>
+<%= link_to "Create a Comments", new_recipe_comment_path(@recipe) %>
 
-
-  <h5>Add Recipe Comments:</h5>
-    <%= render 'comments/form', comment: @recipe.comments.new, recipe: @recipe %>   
-
-  <br>
-  <br>
-
-
-    <% end %>
+<h3> comments </h3>
+<% @recipe.comments.each do |c| %>
+    <h2><%= c.content %> -  <%= c.user.username%> </h2>
+    <%= link_to "Edit comment", edit_recipe_comment_path(@recipe.id,c.id) %>
+ 
+<% end %>

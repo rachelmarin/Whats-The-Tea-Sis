@@ -1,5 +1,3 @@
-<h1> Edit Comment </h1>
-<%= render partial: "form", locals: {comment: @comment, recipe: @comment.recipe, button_name: "Update Comment"} %> 
-<br>
 
-<%= link_to "Delete Comment", comment_path(@comment), method: "delete", class:"custom_button"%> 
+<h4> Edit a Comment </h4>
+<%= render partial: 'form', locals: {comment: @comment, url:recipe_comments_path(@recipe), recipe:@recipe}%>
