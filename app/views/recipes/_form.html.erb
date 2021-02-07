@@ -22,6 +22,7 @@
     <div>
       <%= category_builder.label :name %>
       <%= category_builder.text_field :name %>
+      <%= category_builder.hidden_field :user_id, value: current_user.id%>
     </div>
     
     <br>

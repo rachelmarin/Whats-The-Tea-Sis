@@ -25,9 +25,10 @@ class RecipesController < ApplicationController
 
    def new
       if @category
-         @recipe = @category.recipes.build
+         @recipe = category.recipes.build
          render :new_category_recipe
-      else
+      
+     else
          @recipe = current_user.recipes.build
 
          @recipe.ingredients.build(name: "")
@@ -37,6 +38,7 @@ class RecipesController < ApplicationController
    end
 
    def create
+      params[:recipe][:user_id] = current_user.id
       @recipe = current_user.recipes.build(recipe_params)
       if @recipe.save
          #if valid
@@ -96,7 +98,8 @@ class RecipesController < ApplicationController
        :title,
        :description,
        :category_id,
-       category_attributes: [:name],
+       :user_id,
+       category_attributes: [:name,:user_id],
        ingredients_attributes: [:id, :name, :quantity, :_destroy],
        directions_attributes: [:id, :step, :_destroy]
     )       
