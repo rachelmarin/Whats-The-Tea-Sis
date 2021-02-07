@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
       end 
       if @user && @user.id
           session[:user_id] = @user.id
-          redirect_to movies_path 
+          redirect_to recipes_path 
       else 
           redirect_to "/login"
       end 
@@ -39,6 +39,7 @@ class SessionsController < ApplicationController
   def auth
       request.env['omniauth.auth']
   end 
+
 
 
 
