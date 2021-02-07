@@ -1,8 +1,16 @@
+
+ <div class="card" style="width: 50rem;">
+  <div class="card-body">
+  
 <%= form_for @recipe do |f| %>
+  
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
   <div class="center-align">
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
+
 
   <h5 class="grey-text text-darken-2">Select Category</h5>
   <div class="center-align">
@@ -23,10 +31,14 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
-
+ </div>
+</div>
   <% end %>
 
   <br><br>
+  <div class="row">
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
     <h5 class="grey-text text-darken-2">Add Ingredients</h5>
       <div>
     
@@ -40,9 +52,11 @@
       </div>
     </div>
   </div>
-    
+     </div>
+</div>
     <br><br>
- 
+ <div class="card" style="width: 18rem;">
+  <div class="card-body">
 <h5 class="grey-text text-darken-2">Add Directions</h5>
       <div>
 
@@ -56,6 +70,9 @@
       </div>
     </div>
   </div>
+   </div>
+</div>
+</div>
     <br>
 
   <%= f.submit %>
@@ -63,3 +80,6 @@
 
 
 <% end %>
+ 
+   </div>
+</div>

@@ -10,20 +10,32 @@
       <strong class="grey-text text-darken-2">Description:</strong> 
       <%= @recipe.description %>
     </p>
-  
+  <div class="row">
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
     <h4 class="grey-text text-darken-2"> Ingredients </h4>
       <ul>
         <% for @ingredients in @recipe.ingredients %>
         <li class="grey-text text-darken-2"><%= @ingredients.name %></li>
+        <li class="grey-text text-darken-2"><%= @ingredients.quantity %></li>
       </ul>
     <% end %>
+    </div>
+    </div>
+    
 <br>
+
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
       <h4 class="grey-text text-darken-2"> Directions </h4>
         <ul>
           <% for @directions in @recipe.directions %>
           <li class="grey-text text-darken-2"><%= @directions.step %></li>
         </ul>
       <%end%>
+       </div>
+    </div>
+    </div>
 <br>
 <%= link_to "Edit", edit_recipe_path(@recipe) %>
 
