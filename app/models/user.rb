@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
     has_many :comments, dependent: :destroy
     has_many :recipes, through: :comments
-  
+    
+    has_many :categories
+    has_many :recipes, through: :categories
   
 end

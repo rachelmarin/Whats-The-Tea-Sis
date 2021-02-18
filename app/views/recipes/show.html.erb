@@ -1,58 +1,65 @@
 
 <br><br>
-<h1 class="grey-text text-darken-2"><%= @recipe.title %></h1>
+<div style="color: #2E1114; text-align:center">
+<h1 style="color: #198900;"><%= @recipe.title %></h1>
     <p class="grey-text text-darken-2">
-      <strong class="grey-text text-darken-2">Category:</strong> 
+      <strong style="color: #198900;">Category:</strong> 
       <%= @recipe.category_name %>
     </p>
 
     <p class="grey-text text-darken-2">
-      <strong class="grey-text text-darken-2">Description:</strong> 
+      <strong style="color: #198900;">Description:</strong> 
       <%= @recipe.description %>
     </p>
+
   <div class="row">
-  <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h4 class="grey-text text-darken-2"> Ingredients </h4>
-      <ul>
+    <h4 style="color: #198900;"> Ingredients </h4>
+      <ul class="list-unstyled">
         <% for @ingredients in @recipe.ingredients %>
-        <li class="grey-text text-darken-2"><%= @ingredients.name %></li>
-        <li class="grey-text text-darken-2"><%= @ingredients.quantity %></li>
+        <p class="grey-text text-darken-2"><%= @ingredients.name %></p>
+        <p class="grey-text text-darken-2"><%= @ingredients.quantity %></p>
       </ul>
     <% end %>
-    </div>
+    
+<br>
+  
+      <h4 style="color: #198900;"> Directions </h4>
+        <ul class="list-unstyled" >
+          <% for @directions in @recipe.directions %>
+          <p class="grey-text text-darken-2"><%= @directions.step %></p>
+        </ul>
+      <%end%>
     </div>
     
 <br>
-
-  <div class="card" style="width: 18rem;">
-  <div class="card-body">
-      <h4 class="grey-text text-darken-2"> Directions </h4>
-        <ul>
-          <% for @directions in @recipe.directions %>
-          <li class="grey-text text-darken-2"><%= @directions.step %></li>
-        </ul>
-      <%end%>
-       </div>
-    </div>
-    </div>
-<br>
+<div>
+<% if current_user.id == @recipe.user_id %>
 <%= link_to "Edit", edit_recipe_path(@recipe) %>
 
 <%= link_to "Delete", recipe_path(@recipe), method: "delete" %> 
+</div>
+<% end %>
 <br><br>
 
 <h3>Comments:</h3>
+
+ <%= link_to "Recipe Comments", recipe_comments_path(@recipe) %>
 <%= 'No comments yet.' if @recipe.comments.empty? %>
 
 <% @recipe.comments.each do |comment| %>
-    <p><%= link_to comment.user.username, user_path(comment.user) %><br>
+    <br>
+    <h6><%= comment.user.username %></h6>
+    <p>
     <%= comment.content %>
     </p>
- <%= link_to 'Destroy Comment', [comment.recipe, comment],
+  
+  <% if current_user && current_user == comment.user %>
+ <%= link_to 'Delete Comment', [comment.recipe, comment],
  method: :delete,
  data: { confirm: 'Are you sure?' } %>
 
+<% end %>
+ 
 <% end %>
 <br><br>
 
@@ -61,3 +68,5 @@
 <!-- We use "@recipe.comments.build" to build a new comment with an existing user_id or a new user, and comment content -->
 
 <%= render partial: "comments/form", locals: { comment: @comment, button_name: "Add Comment" } %>
+
+</div>

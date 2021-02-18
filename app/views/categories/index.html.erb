@@ -1,10 +1,7 @@
-<br><br>
-<h1 class="grey-text text-darken-2"> Tea Recipe Category List </h1>
+<br>
+<h1 style="color: #198900;"> Tea Recipe Category List </h1>
   <% @categories.each do |category| %>
-<br>
- 
-<br>
-<ul>
+<ul class="list-unstyled">
     <li><%= link_to category.name, category_path(category)%></li>
   <% end %>
 </ul>

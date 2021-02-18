@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
-  before_action :find_category, only: [:edit, :update, :destroy]
+  before_action :redirect_if_not_logged_in
+  before_action :find_category, only: [:edit, :new, :update, :destroy]
+  before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
 
     def index
       @categories = Category.all.alphabetize 
@@ -10,15 +12,16 @@ class CategoriesController < ApplicationController
     end
 
     def new  
-        @category = Category.new
+        @category = current_user.categories.new
 
-        2.times { @category.recipes.build }
+        @category.recipes.build
+        @category.recipes.build
        
       end
       
       def create
         params[:category][:user_id] = current_user.id
-        @category = Category.new(category_params)
+        @category = current_user.categories.new(category_params)
         if @category.save
           redirect_to categories_path(@category)
         else
@@ -40,19 +43,21 @@ class CategoriesController < ApplicationController
         end
       end
     
-     
-      private
-      def find_category
+      def destroy
         @category = Category.find(params[:id])
-      end
+        if @category.present?
+          @category.destroy
+        end
+        redirect_to categories_path
+    end
+      private
+    
 
     def category_params
       params.require(:category).permit(
         :name,
         :user_id,
-        recipes_attributes: [:title, :description, :category_id, :user_id],
-        ingredients_attributes: [:id, :name, :quantity, :_destroy],
-        directions_attributes: [:id, :step, :_destroy]
+        recipes_attributes: [:title, :description, :category_id, :user_id]
       )
     end
   end

@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 
   
   resources :recipes
-  resources :users
+  resources :categories
+  resources :users, except: [:update, :destroy]
   
   resources :recipes do
   resources :comments
@@ -27,11 +28,7 @@ Rails.application.routes.draw do
     resources :recipes
   end
 
-    
-   
   
-  
-
 
 end
 

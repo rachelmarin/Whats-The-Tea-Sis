@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
-   before_action :find_category, only: [:index, :new, :create]
-    before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
+   before_action :redirect_if_not_logged_in
+   before_action :find_category, only: [:index, :new, :update, :create]
+   before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
     layout "recipes_layout"  
    
     def index
@@ -78,16 +79,7 @@ class RecipesController < ApplicationController
    end
 
    private
-   
-   def find_recipe
-      @recipe = Recipe.find(params[:id])
-    end
 
-    def find_category
-      if params[:category_id]
-        @category = Category.find_by_id(params[:category_id])
-      end
-    end
     
     def alphabetize
       order(title: :asc)

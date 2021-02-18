@@ -1,0 +1,8 @@
+<h1 style="color: #198900;"><%= @comment.content %></h1>
+<br>
+<div>
+ <% if current_user.id == @comment.user_id %>
+<%= link_to "Delete", comment_path(@comment), method: "delete" %> 
+</div>
+
+<% end %>

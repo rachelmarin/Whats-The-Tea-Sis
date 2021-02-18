@@ -12,12 +12,13 @@
   </div>
 
 
-  <h5 class="grey-text text-darken-2">Select Category</h5>
+  <h5>Select Category</h5>
   <div class="center-align">
     <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>
+    <%= hidden_field :user_id, value: current_user.id%>
   </div>
 <br>
-  <h5 class="grey-text text-darken-2">Or Create category</h5>
+  <h5>Or Create Category</h5>
   <%= f.fields_for :category, @recipe.build_category do |category_builder| %>
     <div>
       <%= category_builder.label :name %>
@@ -41,8 +42,8 @@
   <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="grey-text text-darken-2">Add Ingredients</h5>
+
       <div>
-    
     <div id="Ingredients">
       <%= f.fields_for :ingredients do |ingredient| %>
         <%= render 'ingredient_fields', f: ingredient %>

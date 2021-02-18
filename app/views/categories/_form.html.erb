@@ -1,4 +1,4 @@
-<h3>Create Category</h3>
+<h3 style="color: #198900;">Create Category</h3>
 
 <%= form_for @category do |f| %>
   <div>
@@ -6,7 +6,20 @@
     <%= f.text_field :name %>
     <%= f.hidden_field :user_id, value: current_user.id%>
   </div> 
-   
-    <%= f.submit %>
+<br><br>
+     <%= f.fields_for :recipes, @category.recipes do |r| %>
+  <h3 style="color: #198900;">Create recipe</h3>
+    <br>
+    <div>
+      <%= r.label :title %>
+      <%= r.text_field :title %>
+      <%= r.hidden_field :user_id, value: current_user.id%>
+    </div>
+      <div>
+    <%= r.label :description %>
+    <%= r.text_field :description %>
+  </div>
   <% end %>
-  <br>
+  <br><br>
+<%= f.submit %>
+<% end %>

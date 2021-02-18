@@ -1,7 +1,17 @@
-<h1><%= @category.name %></h1>
+<h1 style="color: #198900;"><%= @category.name %></h1>
+<br>
+<div>
+ <% if current_user.id == @category.user_id %>
+<%= link_to "Delete", category_path(@category), method: "delete" %> 
+</div>
+
+<% end %>
+<br><br>
 
 <% @category.recipes.each do |recipe| %>
   <p>
     <%= link_to recipe.title, recipe_path(recipe) %>
   </p>
+
+
 <% end %>

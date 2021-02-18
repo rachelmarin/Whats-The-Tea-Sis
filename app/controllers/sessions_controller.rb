@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-    
-    def new 
+  before_action :redirect_if_logged_in, except: [:destroy]
+  def new 
      @user = User.new  
     end
   
@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       @user = User.find_by_email(params[:email])
   
       if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
         login_user
         redirect_to recipes_path
       else
