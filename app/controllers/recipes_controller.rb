@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
    def new
       if @category
          @recipe = category.recipes.build
-         render :new_category_recipe
+         render :new_category_recipe_path
       
      else
          @recipe = current_user.recipes.build

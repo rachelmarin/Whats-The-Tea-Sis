@@ -47,4 +47,10 @@ def find_category
   end
 end
 
+def find_comment
+  if params[:comment_id]
+    @comment = Comment.find_by_id(params[:comment_id])
+  end
+end
+
 end

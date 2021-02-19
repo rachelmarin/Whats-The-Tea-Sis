@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
             redirect_to user_path(@user)
           login_user
-          redirect_to recipes_path
+          
       else
           flash.now[:error] = @user.errors.full_messages
           render :new

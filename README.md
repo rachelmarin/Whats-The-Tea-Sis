@@ -21,4 +21,10 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+//License
+
+License & copyright
+
+Copyright (c) 2021 Rachel Marin
+
+This app is available as open source under the terms of the MIT License.

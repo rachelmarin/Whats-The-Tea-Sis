@@ -22,7 +22,7 @@
         redirect_to recipe_comments_path(@recipe), alert: "comment not found"
       end
     else
-      @comment = Comment.find(params[:id])
+      @comment = Comment.find_by_id(params[:id])
     end
   end
 
@@ -39,9 +39,6 @@
   end
 
  
-  
-  private
- 
   def destroy
     if current_user
       @recipe = Recipe.find(params[:recipe_id])
@@ -52,10 +49,15 @@
       redirect_to recipe_path(@recipe)
     end
   end
+
   private
   
   def comment_params
-      params.require(:comment).permit(:content, :recipe_id, :user_id, user_attributes: [:username])
+      params.require(:comment).permit(
+        :content, 
+        :recipe_id, 
+        :user_id, 
+        user_attributes: [:username])
   end
 
   end

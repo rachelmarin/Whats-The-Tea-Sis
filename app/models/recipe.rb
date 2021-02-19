@@ -26,6 +26,5 @@ class Recipe < ApplicationRecord
     self.category ? self.category.name : "category not available"
   end
 
-  
 
 end

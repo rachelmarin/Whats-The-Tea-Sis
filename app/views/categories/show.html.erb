@@ -4,8 +4,8 @@
  <% if current_user.id == @category.user_id %>
 <%= link_to "Delete", category_path(@category), method: "delete" %> 
 </div>
-
 <% end %>
+
 <br><br>
 
 <% @category.recipes.each do |recipe| %>

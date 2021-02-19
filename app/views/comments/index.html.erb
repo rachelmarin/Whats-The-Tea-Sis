@@ -1,6 +1,9 @@
 <h1>All Comments</h1> 
 <% @comments.each do |comment| %>
 <ul class="list-unstyled">
-    <li><%= link_to comment.content, comment_path(@recipe)%></li>
+    <br>
+    <h6><%= comment.user.username %></h6>
+    <p>
+    <%= comment.content %>
+    </p>
   <% end %>
-</ul>
