@@ -15,15 +15,18 @@ To use this application please fork and clone this repository and open in your m
 
 In your terminal shell type the following:
 
-bundle install
+"bundle install"
+
 This will install neccessary gems to run the program.
 
 For database migration please type the following into terminal shell:
 
-rails db:migrate
+"rails db:migrate"
+
 To connect to a local host, please type the following command:
 
-rails s
+"rails s"
+
 When it has confirmed you are connected to a local host, please visit your web browser and click here to interact with the program.
 
 You may now create an account, login with your own credentials or with the 'login with google' option, and start sharing all the tea recipes!
