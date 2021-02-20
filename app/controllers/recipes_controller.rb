@@ -1,13 +1,12 @@
 class RecipesController < ApplicationController
    before_action :redirect_if_not_logged_in
-   before_action :find_category, only: [:index, :new, :update, :create]
+   before_action :find_category, only: [:index, :new, :edit, :update, :create]
    before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
     layout "recipes_layout"  
    
     def index
-     
       if @category
-         @recipe = @category.recipe
+         @recipe = @category.recipes
       else
          @recipes = Recipe.all.alphabetize    
       end
@@ -16,9 +15,6 @@ class RecipesController < ApplicationController
       end
       @recipes = @recipes.search(params[:q].downcase) if params[:q] && !params[:q].empty?
    end
-
- 
-
 
    def show
       if @category
@@ -85,10 +81,6 @@ class RecipesController < ApplicationController
 
    private
 
-    
-   #  def alphabetize
-   #    order(title: :asc)
-   #  end
 
    def recipe_params
       params.require(:recipe).permit(

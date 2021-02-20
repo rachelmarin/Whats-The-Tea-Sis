@@ -14,7 +14,8 @@ class User < ApplicationRecord
     
     has_many :categories
     has_many :recipes, through: :categories
-   
+    
+
     def self.alphabetize
         order(username: :asc)
       end 
