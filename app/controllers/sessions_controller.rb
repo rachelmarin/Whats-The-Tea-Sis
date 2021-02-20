@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
-        login_user
+        is_logged_in
         redirect_to recipes_path
       else
         flash.now[:error] = ["Username Or Password didn't match"]
@@ -32,10 +32,11 @@ class SessionsController < ApplicationController
           u.last_name = auth["info"]["last_name"]
           u.username = auth["info"]["email"]
           end
-          if @user && @user.id
-                    session[:user_id] = @user.id
+          if user && user.id
+                    session[:user_id] = user.id
                     redirect_to recipes_path 
                 else 
+                  
                     redirect_to "/login"
                 end 
             end 

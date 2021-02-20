@@ -5,15 +5,20 @@ class RecipesController < ApplicationController
     layout "recipes_layout"  
    
     def index
+     
       if @category
          @recipe = @category.recipe
       else
-       @recipes = Recipe.all.alphabetize    
+         @recipes = Recipe.all.alphabetize    
       end
       if @comment 
          @recipes = @comment.recipes
-       end
+      end
+      @recipes = @recipes.search(params[:q].downcase) if params[:q] && !params[:q].empty?
    end
+
+ 
+
 
    def show
       if @category
@@ -81,9 +86,9 @@ class RecipesController < ApplicationController
    private
 
     
-    def alphabetize
-      order(title: :asc)
-    end
+   #  def alphabetize
+   #    order(title: :asc)
+   #  end
 
    def recipe_params
       params.require(:recipe).permit(

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
-  
-    def new
+  before_action :redirect_if_not_logged_in, only: [:show]
+    
+  def index
+    @users = User.all.alphabetize 
+  end 
+  def new
         @user = User.new
       end
     
@@ -13,7 +17,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
             redirect_to user_path(@user)
-          login_user
+            is_logged_in
           
       else
           flash.now[:error] = @user.errors.full_messages

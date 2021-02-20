@@ -18,13 +18,14 @@ class Recipe < ApplicationRecord
   
   validates :title, :description, presence: true
   
-     def self.alphabetize
-      order(title: :asc)
-    end
+
+    scope :alphabetize, -> { order(:title, :asc) }
+
+  def self.search(params)
+    where("LOWER(title) LIKE :term OR LOWER(description) LIKE :term", term: "%#{params}%")  
+  end
 
   def category_name
     self.category ? self.category.name : "category not available"
   end
-
-
 end

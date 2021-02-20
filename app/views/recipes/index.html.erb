@@ -1,6 +1,22 @@
 <br><br>
-<h1 class="grey-text text-darken-2" style="color: #198900;"> Tea Recipe List </h1>
+<div class="container">
+  <div class="card" style="width: 30rem;">
+    <div class="card-body">
+    
+<%= form_tag("/recipes", method: 'get') do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+    </div>
+  </div>
+
+  <br><br>
+
+<h1 style="color: #198900;"> Tea Recipe List </h1>
 
 <ul class="list-unstyled"> 
   <%= render @recipes %>
 </ul>
+
+</div>

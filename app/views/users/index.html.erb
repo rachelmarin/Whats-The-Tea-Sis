@@ -4,10 +4,11 @@
 <br>
 <br>
 <div class="container">
-<h1>My Recipes</h1>
+<h1>Recipes by User</h1>
 
-<ul class="list-unstyled"> 
-  <%= render @recipes.current_user %>
+  <% @users.each do |user| %>
+<ul class="list-unstyled">
+    <li><%= link_to user.username, user_path(user)%></li>
+  <% end %>
 </ul>
 </div>
-
