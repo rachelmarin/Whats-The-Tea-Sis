@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
    before_action :redirect_if_not_logged_in
    before_action :find_category, only: [:index, :new, :edit, :update, :create]
-   before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
+   before_action :find_recipe
     layout "recipes_layout"  
    
     def index
@@ -27,8 +27,8 @@ class RecipesController < ApplicationController
 
    def new
       if @category
-         @recipe = category.recipes.build
-         render :new_category_recipe_path
+         @recipe = @category.recipes.build
+         render :new_category_recipe
       
      else
          @recipe = current_user.recipes.build
@@ -45,7 +45,7 @@ class RecipesController < ApplicationController
       if @recipe.save
          #if valid
          if @category
-            redirect_to category_recipe_path(@category)
+            redirect_to category_path(@category)
          else   
             redirect_to recipes_path
          end
@@ -54,7 +54,7 @@ class RecipesController < ApplicationController
          flash.now[:error] = @recipe.errors.full_messages
          
          if @category
-            render :new_category_recipe_path
+            render :new_category_recipe
          else
             render :new
          end
@@ -81,7 +81,15 @@ class RecipesController < ApplicationController
 
    private
 
-
+   def find_recipe
+      @recipe = Recipe.find_by_id(params[:id])
+  end
+  
+  def find_category
+    if params[:category_id]
+      @category = Category.find_by_id(params[:category_id])
+    end
+  end
    def recipe_params
       params.require(:recipe).permit(
        :title,

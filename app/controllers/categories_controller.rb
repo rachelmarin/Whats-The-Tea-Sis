@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :redirect_if_not_logged_in
-  before_action :find_category, only: [:edit, :new, :update, :destroy]
+  before_action :find_category, only: [:index, :show, :new, :create, :destroy ]
+
   before_action :find_recipe, only: [:show, :edit, :update, :destroy ]
 
     def index
@@ -15,6 +16,7 @@ class CategoriesController < ApplicationController
         @category = current_user.categories.new
 
         @category.recipes.build
+        
         @category.recipes.build
        
       end
@@ -30,18 +32,6 @@ class CategoriesController < ApplicationController
         end
       end
       
-      def edit
-    
-      end
-    
-      def update
-        if @category.update(category_params)
-          redirect_to category_path(@category)
-        else
-          flash.now[:error] = @category.errors.full_messages
-          render :edit
-        end
-      end
     
       def destroy
         @category = Category.find(params[:id])

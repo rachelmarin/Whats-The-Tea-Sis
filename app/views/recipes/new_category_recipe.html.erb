@@ -1,43 +1,18 @@
+  
+<h1>Add Category Recipe </h1>
 
- <div class="card" style="width: 50rem;">
-  <div class="card-body">
-  
-<%= form_for @recipe do |f| %>
-  
-  <div class="card" style="width: 18rem;">
-  <div class="card-body">
-  <div class="center-align">
+<%= form_for [@category, @recipe] do |f| %>
+  <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
-
-
-  <h5>Select Category</h5>
-  <div class="center-align">
-    <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>
-    <%= f.hidden_field :user_id, value: current_user.id%>
-  </div>
-<br>
-  <h5>Or Create Category</h5>
-  <%= f.fields_for :category, @recipe.build_category do |category_builder| %>
-    <div>
-      <%= category_builder.label :name %>
-      <%= category_builder.text_field :name %>
-      <%= category_builder.hidden_field :user_id, value: current_user.id%>
-    </div>
-    
-    <br>
-
-    <h5 class="grey-text text-darken-2">Add description</h5>
-   <div>
+  <div>
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
- </div>
-</div>
-  <% end %>
 
-  <br><br>
+
+<br><br>
   <div class="row">
   <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -75,13 +50,8 @@
    </div>
 </div>
 </div>
-    <br>
 
-  <%= f.submit %>
+  <%= f.hidden_field :category_id %>
 
-
-
+  <%= f.submit "Create Recipe" %>
 <% end %>
- 
-   </div>
-</div>

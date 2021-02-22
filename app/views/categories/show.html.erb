@@ -6,12 +6,12 @@
 </div>
 <% end %>
 
+ <%= link_to "Create Recipe for Category", new_category_recipe_path(@category) %> 
 <br><br>
 
 <% @category.recipes.each do |recipe| %>
   <p>
     <%= link_to recipe.title, recipe_path(recipe) %>
   </p>
-
 
 <% end %>
